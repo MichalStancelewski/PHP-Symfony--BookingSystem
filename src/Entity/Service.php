@@ -11,7 +11,7 @@ class Service
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column()]
+    #[ORM\Column(length: 5)]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
