@@ -30,6 +30,9 @@ class Review
     #[ORM\JoinColumn(nullable: false)]
     private ?Service $service = null;
 
+    #[ORM\Column]
+    private ?\DateTimeImmutable $createdAt = null;
+
     public function __toString(): string
     {
         return $this->id;
@@ -96,6 +99,18 @@ class Review
     public function setService(?Service $service): self
     {
         $this->service = $service;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }
