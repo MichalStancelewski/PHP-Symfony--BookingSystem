@@ -30,9 +30,14 @@ class Review
     #[ORM\JoinColumn(nullable: false)]
     private ?Service $service = null;
 
-    public function getId(): ?int
+    public function __toString(): string
     {
         return $this->id;
+    }
+
+    public function getId(): ?int
+    {
+        return $this->service . ' | ' . $this->id;
     }
 
     public function getContent(): ?string
