@@ -35,12 +35,13 @@ class Review
 
     public function __toString(): string
     {
-        return $this->id;
+        return $this->service . ' | ' . $this->id;
     }
 
     public function getId(): ?int
     {
-        return $this->service . ' | ' . $this->id;
+
+        return $this->id;
     }
 
     public function getContent(): ?string
