@@ -52,9 +52,17 @@ class Service
     #[ORM\OneToMany(mappedBy: 'service', targetEntity: Review::class, orphanRemoval: true)]
     private Collection $reviews;
 
+    #[ORM\Column(length: 255)]
+    private ?string $ManyToOne = null;
+
+    #[ORM\ManyToOne(inversedBy: 'services')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?ServiceCategories $category = null;
+
     public function __construct()
     {
         $this->reviews = new ArrayCollection();
+        $this->category = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -228,4 +236,29 @@ class Service
 
         return $this;
     }
+
+    public function getManyToOne(): ?string
+    {
+        return $this->ManyToOne;
+    }
+
+    public function setManyToOne(string $ManyToOne): self
+    {
+        $this->ManyToOne = $ManyToOne;
+
+        return $this;
+    }
+
+    public function getCategory(): ?ServiceCategories
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?ServiceCategories $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
 }
