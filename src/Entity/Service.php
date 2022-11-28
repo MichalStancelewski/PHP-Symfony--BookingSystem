@@ -59,6 +59,9 @@ class Service
     #[ORM\JoinColumn(nullable: false)]
     private ?ServiceCategories $category = null;
 
+    #[ORM\OneToOne(mappedBy: 'service', cascade: ['persist', 'remove'])]
+    private ?Comment $comment = null;
+
     public function __construct()
     {
         $this->reviews = new ArrayCollection();
@@ -257,6 +260,28 @@ class Service
     public function setCategory(?ServiceCategories $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getComment(): ?Comment
+    {
+        return $this->comment;
+    }
+
+    public function setComment(?Comment $comment): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($comment === null && $this->comment !== null) {
+            $this->comment->setService(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($comment !== null && $comment->getService() !== $this) {
+            $comment->setService($this);
+        }
+
+        $this->comment = $comment;
 
         return $this;
     }
