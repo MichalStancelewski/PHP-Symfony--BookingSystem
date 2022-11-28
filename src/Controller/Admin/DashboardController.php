@@ -2,8 +2,11 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Comment;
 use App\Entity\Review;
 use App\Entity\Service;
+use App\Entity\ServiceCategories;
+use App\Entity\Settings;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -48,6 +51,9 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linktoRoute('Back to the website', 'fas fa-home', 'homepage');
         yield MenuItem::linkToCrud('Services', 'fas fa-map-marker-alt', Service::class);
+        yield MenuItem::linkToCrud('Categories', 'fas fa-comments', ServiceCategories::class);
         yield MenuItem::linkToCrud('Reviews', 'fas fa-comments', Review::class);
+        yield MenuItem::linkToCrud('Comments', 'fas fa-comments', Comment::class);
+        yield MenuItem::linkToCrud('Settings', 'fas fa-comments', Settings::class);
     }
 }
